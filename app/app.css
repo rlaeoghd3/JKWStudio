@@ -1,30 +1,23 @@
 /* app css stylesheet */
-
-.menu {
-  list-style: none;
-  border-bottom: 0.1em solid black;
-  margin-bottom: 2em;
-  padding: 0 0 0.5em;
+body{
+	margin: 0;
+	height: 100vh;
+	width: 100vw;
+	text-align: center;
+	font-family: 'Montserrat', sans-serif;
 }
 
-.menu:before {
-  content: "[";
+.main_logo{
+	height: 150px;
+	width: 280px;
+	vertical-align: middle;
 }
 
-.menu:after {
-  content: "]";
+.helper {
+    display: inline-block;
+    height: 40%;
+    vertical-align: middle;
 }
-
-.menu > li {
-  display: inline;
-}
-
-.menu > li:before {
-  content: "|";
-  padding-right: 0.3em;
-}
-
-.menu > li:nth-child(1):before {
-  content: "";
-  padding: 0;
+.grey{
+	color: grey;
 }
