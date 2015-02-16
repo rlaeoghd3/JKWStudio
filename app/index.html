@@ -4,39 +4,155 @@
 <!--[if IE 8]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!--> <html lang="en" ng-app="myApp" class="no-js"> <!--<![endif]-->
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>JKW STUDIO</title>
-  <meta name="description" content="">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="bower_components/html5-boilerplate/css/normalize.css">
-  <link rel="stylesheet" href="bower_components/html5-boilerplate/css/main.css">
-  <link rel="stylesheet" href="app.css">
-  <script src="bower_components/html5-boilerplate/js/vendor/modernizr-2.6.2.min.js"></script>
-  
-  <link href='http://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
+     <meta charset="utf-8">
+     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+     <title>My AngularJS App</title>
+     <meta name="description" content="">
+     <meta name="viewport" content="width=device-width, initial-scale=1">
+     <link rel="stylesheet" href="bower_components/html5-boilerplate/css/normalize.css">
+     <link rel="stylesheet" href="bower_components/html5-boilerplate/css/main.css">
+
+     <script src="bower_components/html5-boilerplate/js/vendor/modernizr-2.6.2.min.js"></script>
+
+     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/0.7.0/angular-material.min.css">
+     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=RobotoDraft:400,500,700,400italic"/>
+
+     <link rel="stylesheet" href="app.css">
+
+<!-- Material Design themes
+@import 'https://cdn.rawgit.com/angular/bower-material/master/themes/amber-theme.css';
+@import 'https://cdn.rawgit.com/angular/bower-material/master/themes/blue-grey-theme.css';
+@import 'https://cdn.rawgit.com/angular/bower-material/master/themes/blue-theme.css';
+@import 'https://cdn.rawgit.com/angular/bower-material/master/themes/cyan-theme.css';
+@import 'https://cdn.rawgit.com/angular/bower-material/master/themes/deep-orange-theme.css';
+@import 'https://cdn.rawgit.com/angular/bower-material/master/themes/deep-purple-theme.css';
+@import 'https://cdn.rawgit.com/angular/bower-material/master/themes/green-theme.css';
+@import 'https://cdn.rawgit.com/angular/bower-material/master/themes/grey-theme.css';
+@import 'https://cdn.rawgit.com/angular/bower-material/master/themes/indigo-theme.css';
+@import 'https://cdn.rawgit.com/angular/bower-material/master/themes/light-blue-dark-theme.css';
+@import 'https://cdn.rawgit.com/angular/bower-material/master/themes/light-green-theme.css';
+@import 'https://cdn.rawgit.com/angular/bower-material/master/themes/lime-theme.css';
+@import 'https://cdn.rawgit.com/angular/bower-material/master/themes/orange-theme.css';
+@import 'https://cdn.rawgit.com/angular/bower-material/master/themes/pink-theme.css';
+@import 'https://cdn.rawgit.com/angular/bower-material/master/themes/purple-theme.css';
+@import 'https://cdn.rawgit.com/angular/bower-material/master/themes/red-theme.css';
+@import 'https://cdn.rawgit.com/angular/bower-material/master/themes/teal-theme.css';
+@import 'https://cdn.rawgit.com/angular/bower-material/master/themes/yellow-theme.css';
+-->
 </head>
-<body>
-	<span class="helper"></span>
-	<div>
-		<img class="main_logo" src="image/JKWSTUDIO_Logo_L.png" alt="" />
-		<p class="grey">Coming soon...</p>
-	</div>
+<body ng-app="myApp" ng-controller="SideNavController" layout="column" layout-align="top center" layout-fill>
+     <md-sidenav md-component-id="left" class="md-sidenav-left">
+          <md-toolbar class="md-theme-indigo md-whiteframe-z1">
+             <h1 class="md-toolbar-tools">MENU</h1>
+          </md-toolbar>
+          <md-list>
+               <md-item ng-repeat="leftNav in leftNavList">
+                  <md-item-content>
+                    <md-button class="md-default-theme md-tile-content" layout="row" ng-click="widgetExpanded = !widgetExpanded">
+                      <h4>{{leftNav.Name}}</h4>
+                      <span flex></span>
+                      <md-icon class="margin-auto" icon="images/ic_keyboard_arrow_down_48px.svg" style="width: 24px; height: 24px;"></md-icon>
+                    </md-button>
+                  </md-item-content>
+                  <div ng-slide-down="widgetExpanded" lazy-render duration="1">
+                  <md-list>
+                    <md-item ng-repeat="subMenu in leftNav.SubMenu">
+                       <md-item-content>
+                         <md-button class="md-default-theme md-tile-content" layout="row">
+                           <span class="sub-menu-items">{{subMenu.SubMenuName}}</span>
+                         </md-button>
+                       </md-item-content>
+                    </md-item>      
+                  </md-list>
+                  </div>
+                  <md-divider ng-if="!$last"></md-divider>
+                </md-item>
+          </md-list>
+     </md-sidenav>
 
-  <!--[if lt IE 7]>
-      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-  <![endif]-->
+     <md-toolbar class="md-default-theme md-whiteframe-z1">
+          <div ng-controller="TopMenuController" class="md-toolbar-tools " layout="row" layout-wrap>
+               <md-button class="nav-button" aria-label="Menu" ng-click="openLeftMenu()" ng-show="!showSearchFieldMobile">
+                    <md-icon class="margin-auto" icon="images/ic_menu_48px.svg" style="width: 24px; height: 24px;"></md-icon>
+               </md-button>
+               <a class="toolbar-brand" ng-href="#" href="#" ng-show="!showSearchFieldMobile">
+                    <img class="main-logo" src="images/ASB_logo.svg" alt="ASB_logo" style="width: 105px; height: 29px;"/>
+               </a>
+               <div flex-gt-lg="25" flex-lg="5"></div>
+               <md-tabs flex-gt-lg="44" flex-lg="55" hide-sm md-selected="tabs.selectedIndex" ng-show="!showSearchField">
+                    <md-tab id="{{topMenu.id}}" aria-controls="{{topMenu.id}}-content" ng-repeat="topMenu in topMenuList">
+                         {{topMenu.Name}}
+                    </md-tab>
+               </md-tabs>
 
-  <!-- In production use:
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
-  -->
-  <script src="bower_components/angular/angular.js"></script>
-  <script src="bower_components/angular-route/angular-route.js"></script>
-  <script src="app.js"></script>
-  <script src="view1/view1.js"></script>
-  <script src="view2/view2.js"></script>
-  <script src="components/version/version.js"></script>
-  <script src="components/version/version-directive.js"></script>
-  <script src="components/version/interpolate-filter.js"></script>
+               <md-button class="nav-button" aria-label="Search" ng-click="openSearchField()">
+                    <md-icon icon="images/ic_search_24px.svg" style="width: 24px; height: 24px;"></md-icon>
+               </md-button>
+              <md-input-container flex-gt-lg="44" flex-md="55" flex-lg="55" flex-sm="46" ng-show="showSearchField">
+                <label>Search for</label>
+                <input ng-model="serach">
+              </md-input-container>
+               <md-button flex-gt-sm="10" class="md-raised md-primary black-theme sign-in-button nav-button">
+                    Sign in
+               </md-button>
+          </div>
+     </md-toolbar>
+     <md-content class="main-content">
+        
+      </md-content>
+     <footer layout="column" layout-align="bottom center">
+        <div class="upper-footer footer-brand" layout="row" layout-wrap>
+          <md-icon class="social-media-icon" icon="images/facebook_icon.svg"></md-icon>
+          <md-icon class="social-media-icon" icon="images/twitter_icon.svg"></md-icon>
+          <md-icon class="social-media-icon" icon="images/youtube_icon.svg"></md-icon>
+          <md-icon class="social-media-icon" icon="images/googleplus_icon.svg"></md-icon>
+          <md-icon class="social-media-icon" icon="images/linkedin_icon.svg"></md-icon>
+          <md-icon class="social-media-icon" icon="images/instagram_icon.svg"></md-icon>
+          <span flex="100" class="copyright">© 2015 ASB Bank Limited</p>
+        </div>
+        <div class="lower-footer footer-brand" layout="row" layout-wrap>
+          <img class="footer-logo" src="images/ASB_logo.svg" alt="ASB_logo" style="width: 90px; height: 25px;"/>
+          <span flex flex-sm="100"></span>
+          <a href="#" class="md-primary footer-link">
+            Terms & Conditions
+          </a>
+          <a href="#" class="md-primary footer-link">
+            Privacy
+          </a>
+          <a href="#" class="md-primary footer-link">
+            Disclosure Statements
+          </a>
+          <a href="#" class="md-primary footer-link">
+            Notices
+          </a>
+        </div>
+     </footer>
+
+
+
+<!--[if lt IE 7]>
+<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+<![endif]-->
+
+<!-- In production use:
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
+-->
+
+<script src="https://cdn.jsdelivr.net/hammerjs/2.0.4/hammer.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.11/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.11/angular-route.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.11/angular-animate.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.11/angular-aria.min.js"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/angular_material/0.7.0/angular-material.min.js"></script>
+
+<script src="app.js"></script>
+
+<script src="view1/view1.js"></script>
+<script src="view2/view2.js"></script>
+
+<script src="components/version/version.js"></script>
+<script src="components/version/version-directive.js"></script>
+<script src="components/version/interpolate-filter.js"></script>
 </body>
 </html>
